@@ -15,7 +15,7 @@ import jakarta.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/test")
 @Service
 public class TestService {
-    private static Set<Session> CLIENTS = Collections.synchronizedSet(new HashSet<>());
+    private static final Set<Session> CLIENTS = Collections.synchronizedSet(new HashSet<>());
 
     @OnOpen
     public void onOpen(Session session) {
