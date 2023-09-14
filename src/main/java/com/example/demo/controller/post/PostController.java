@@ -1,11 +1,16 @@
 package com.example.demo.controller.post;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.controller.post.dto.DetailResponse;
+import com.example.demo.controller.post.dto.PostsResponse;
+import com.example.demo.controller.post.service.PostService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
 
-@RestController("/post")
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/post")
 public class PostController {
+    private final PostService postService;
 
     @PostMapping
     public void post() {
@@ -13,7 +18,12 @@ public class PostController {
     }
 
     @GetMapping("/{seq}")
-    public void getPost() {
+    public DetailResponse getPost(@PathVariable int seq) {
+        return postService.getPost(seq);
+    }
 
+    @GetMapping
+    public PostsResponse getPosts() {
+        return postService.getPosts();
     }
 }

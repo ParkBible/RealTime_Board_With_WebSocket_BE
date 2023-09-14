@@ -1,8 +1,10 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity(name = "reples")
+@Data
 public class Reple {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -10,7 +12,7 @@ public class Reple {
     private String content;
     private int postSeq;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "userSeq")
     private User user;
 }
