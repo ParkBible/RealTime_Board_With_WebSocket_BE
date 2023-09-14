@@ -15,7 +15,7 @@ import jakarta.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/test")
 @Service
 public class TestService {
-    private static Set<Session> CLIENTS = Collections.synchronizedSet(new HashSet<>());
+    private static final Set<Session> CLIENTS = Collections.synchronizedSet(new HashSet<>());
 
     @OnOpen
     public void onOpen(Session session) {
@@ -37,7 +37,7 @@ public class TestService {
 
     @OnMessage
     public void onMessage(String message, Session session) throws Exception {
-        System.out.println("입력된 메세지입니다. > " + message);
+        System.out.println(session + "에 의해 입력된 메세지입니다. > " + message);
 
         for (Session client : CLIENTS) {
             System.out.println("메세지를 전달합니다. > " + message);
